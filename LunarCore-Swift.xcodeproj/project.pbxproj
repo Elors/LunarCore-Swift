@@ -8,20 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		F4652AD31DCF3D700089258B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4652AD21DCF3D700089258B /* AppDelegate.swift */; };
-		F4652AD51DCF3D700089258B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4652AD41DCF3D700089258B /* ViewController.swift */; };
 		F4652AD81DCF3D700089258B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4652AD61DCF3D700089258B /* Main.storyboard */; };
 		F4652ADA1DCF3D700089258B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4652AD91DCF3D700089258B /* Assets.xcassets */; };
 		F4652ADD1DCF3D700089258B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4652ADB1DCF3D700089258B /* LaunchScreen.storyboard */; };
+		F4652AE81DCF3EEF0089258B /* LunarCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4652AE71DCF3EEF0089258B /* LunarCore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F4652ACF1DCF3D700089258B /* LunarCore-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LunarCore-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F4652AD21DCF3D700089258B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F4652AD41DCF3D700089258B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F4652AD21DCF3D700089258B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "../LunarCore-Swift/AppDelegate.swift"; sourceTree = "<group>"; };
 		F4652AD71DCF3D700089258B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F4652AD91DCF3D700089258B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F4652AD91DCF3D700089258B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../LunarCore-Swift/Assets.xcassets"; sourceTree = "<group>"; };
 		F4652ADC1DCF3D700089258B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		F4652ADE1DCF3D700089258B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4652ADE1DCF3D700089258B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "../../LunarCore-Swift/Info.plist"; sourceTree = "<group>"; };
+		F4652AE71DCF3EEF0089258B /* LunarCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LunarCore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +39,7 @@
 			isa = PBXGroup;
 			children = (
 				F4652AD11DCF3D700089258B /* LunarCore-Swift */,
+				F4652AE51DCF3E6D0089258B /* Sample */,
 				F4652AD01DCF3D700089258B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,14 +55,29 @@
 		F4652AD11DCF3D700089258B /* LunarCore-Swift */ = {
 			isa = PBXGroup;
 			children = (
+				F4652AE71DCF3EEF0089258B /* LunarCore.swift */,
+			);
+			path = "LunarCore-Swift";
+			sourceTree = "<group>";
+		};
+		F4652AE51DCF3E6D0089258B /* Sample */ = {
+			isa = PBXGroup;
+			children = (
 				F4652AD21DCF3D700089258B /* AppDelegate.swift */,
-				F4652AD41DCF3D700089258B /* ViewController.swift */,
+				F4652AE61DCF3E830089258B /* Supporting Files */,
+			);
+			path = Sample;
+			sourceTree = "<group>";
+		};
+		F4652AE61DCF3E830089258B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
 				F4652AD61DCF3D700089258B /* Main.storyboard */,
 				F4652AD91DCF3D700089258B /* Assets.xcassets */,
 				F4652ADB1DCF3D700089258B /* LaunchScreen.storyboard */,
 				F4652ADE1DCF3D700089258B /* Info.plist */,
 			);
-			path = "LunarCore-Swift";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,8 +152,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4652AD51DCF3D700089258B /* ViewController.swift in Sources */,
 				F4652AD31DCF3D700089258B /* AppDelegate.swift in Sources */,
+				F4652AE81DCF3EEF0089258B /* LunarCore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,6 +166,7 @@
 				F4652AD71DCF3D700089258B /* Base */,
 			);
 			name = Main.storyboard;
+			path = "../../LunarCore-Swift";
 			sourceTree = "<group>";
 		};
 		F4652ADB1DCF3D700089258B /* LaunchScreen.storyboard */ = {
@@ -158,6 +175,7 @@
 				F4652ADC1DCF3D700089258B /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = "../../LunarCore-Swift";
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -260,7 +278,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "LunarCore-Swift/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "sample.elors.lunarcore.LunarCore-Swift";
+				PRODUCT_BUNDLE_IDENTIFIER = sample.elors.lunarcore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -272,7 +290,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "LunarCore-Swift/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "sample.elors.lunarcore.LunarCore-Swift";
+				PRODUCT_BUNDLE_IDENTIFIER = sample.elors.lunarcore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -297,6 +315,7 @@
 				F4652AE31DCF3D700089258B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
