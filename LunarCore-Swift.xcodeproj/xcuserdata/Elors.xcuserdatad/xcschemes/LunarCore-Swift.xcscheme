@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F4652ACE1DCF3D700089258B"
-               BuildableName = "LunarCore-Swift.app"
+               BlueprintIdentifier = "F44E657A1DD060CC00379BE7"
+               BuildableName = "LunarCore-Swift"
                BlueprintName = "LunarCore-Swift"
                ReferencedContainer = "container:LunarCore-Swift.xcodeproj">
             </BuildableReference>
@@ -32,8 +32,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F4652ACE1DCF3D700089258B"
-            BuildableName = "LunarCore-Swift.app"
+            BlueprintIdentifier = "F44E657A1DD060CC00379BE7"
+            BuildableName = "LunarCore-Swift"
             BlueprintName = "LunarCore-Swift"
             ReferencedContainer = "container:LunarCore-Swift.xcodeproj">
          </BuildableReference>
@@ -55,8 +55,8 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F4652ACE1DCF3D700089258B"
-            BuildableName = "LunarCore-Swift.app"
+            BlueprintIdentifier = "F44E657A1DD060CC00379BE7"
+            BuildableName = "LunarCore-Swift"
             BlueprintName = "LunarCore-Swift"
             ReferencedContainer = "container:LunarCore-Swift.xcodeproj">
          </BuildableReference>
@@ -74,8 +74,8 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F4652ACE1DCF3D700089258B"
-            BuildableName = "LunarCore-Swift.app"
+            BlueprintIdentifier = "F44E657A1DD060CC00379BE7"
+            BuildableName = "LunarCore-Swift"
             BlueprintName = "LunarCore-Swift"
             ReferencedContainer = "container:LunarCore-Swift.xcodeproj">
          </BuildableReference>

@@ -7,25 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F4652AD31DCF3D700089258B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4652AD21DCF3D700089258B /* AppDelegate.swift */; };
-		F4652AD81DCF3D700089258B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4652AD61DCF3D700089258B /* Main.storyboard */; };
-		F4652ADA1DCF3D700089258B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4652AD91DCF3D700089258B /* Assets.xcassets */; };
-		F4652ADD1DCF3D700089258B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4652ADB1DCF3D700089258B /* LaunchScreen.storyboard */; };
-		F4652AE81DCF3EEF0089258B /* LunarCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4652AE71DCF3EEF0089258B /* LunarCore.swift */; };
+		F44E65871DD0615600379BE7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E65861DD0615600379BE7 /* main.swift */; };
+		F44E65891DD0616000379BE7 /* LunarCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E65881DD0616000379BE7 /* LunarCore.swift */; };
+		F44E658B1DD061F200379BE7 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E658A1DD061F200379BE7 /* Extension.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		F44E65791DD060CC00379BE7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		F4652ACF1DCF3D700089258B /* LunarCore-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LunarCore-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F4652AD21DCF3D700089258B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "../LunarCore-Swift/AppDelegate.swift"; sourceTree = "<group>"; };
-		F4652AD71DCF3D700089258B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F4652AD91DCF3D700089258B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../LunarCore-Swift/Assets.xcassets"; sourceTree = "<group>"; };
-		F4652ADC1DCF3D700089258B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		F4652ADE1DCF3D700089258B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "../../LunarCore-Swift/Info.plist"; sourceTree = "<group>"; };
-		F4652AE71DCF3EEF0089258B /* LunarCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LunarCore.swift; sourceTree = "<group>"; };
+		F44E657B1DD060CC00379BE7 /* LunarCore-Swift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "LunarCore-Swift"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F44E65861DD0615600379BE7 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		F44E65881DD0616000379BE7 /* LunarCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LunarCore.swift; sourceTree = "<group>"; };
+		F44E658A1DD061F200379BE7 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		F4652ACC1DCF3D700089258B /* Frameworks */ = {
+		F44E65781DD060CC00379BE7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -35,61 +42,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F4652AC61DCF3D700089258B = {
+		F44E65721DD060CC00379BE7 = {
 			isa = PBXGroup;
 			children = (
-				F4652AD11DCF3D700089258B /* LunarCore-Swift */,
-				F4652AE51DCF3E6D0089258B /* Sample */,
-				F4652AD01DCF3D700089258B /* Products */,
+				F44E657D1DD060CC00379BE7 /* LunarCore-Swift */,
+				F44E65851DD060FD00379BE7 /* Sample */,
+				F44E657C1DD060CC00379BE7 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		F4652AD01DCF3D700089258B /* Products */ = {
+		F44E657C1DD060CC00379BE7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F4652ACF1DCF3D700089258B /* LunarCore-Swift.app */,
+				F44E657B1DD060CC00379BE7 /* LunarCore-Swift */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F4652AD11DCF3D700089258B /* LunarCore-Swift */ = {
+		F44E657D1DD060CC00379BE7 /* LunarCore-Swift */ = {
 			isa = PBXGroup;
 			children = (
-				F4652AE71DCF3EEF0089258B /* LunarCore.swift */,
+				F44E65881DD0616000379BE7 /* LunarCore.swift */,
 			);
 			path = "LunarCore-Swift";
 			sourceTree = "<group>";
 		};
-		F4652AE51DCF3E6D0089258B /* Sample */ = {
+		F44E65851DD060FD00379BE7 /* Sample */ = {
 			isa = PBXGroup;
 			children = (
-				F4652AD21DCF3D700089258B /* AppDelegate.swift */,
-				F4652AE61DCF3E830089258B /* Supporting Files */,
+				F44E658A1DD061F200379BE7 /* Extension.swift */,
+				F44E65861DD0615600379BE7 /* main.swift */,
 			);
 			path = Sample;
-			sourceTree = "<group>";
-		};
-		F4652AE61DCF3E830089258B /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				F4652AD61DCF3D700089258B /* Main.storyboard */,
-				F4652AD91DCF3D700089258B /* Assets.xcassets */,
-				F4652ADB1DCF3D700089258B /* LaunchScreen.storyboard */,
-				F4652ADE1DCF3D700089258B /* Info.plist */,
-			);
-			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F4652ACE1DCF3D700089258B /* LunarCore-Swift */ = {
+		F44E657A1DD060CC00379BE7 /* LunarCore-Swift */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F4652AE11DCF3D700089258B /* Build configuration list for PBXNativeTarget "LunarCore-Swift" */;
+			buildConfigurationList = F44E65821DD060CC00379BE7 /* Build configuration list for PBXNativeTarget "LunarCore-Swift" */;
 			buildPhases = (
-				F4652ACB1DCF3D700089258B /* Sources */,
-				F4652ACC1DCF3D700089258B /* Frameworks */,
-				F4652ACD1DCF3D700089258B /* Resources */,
+				F44E65771DD060CC00379BE7 /* Sources */,
+				F44E65781DD060CC00379BE7 /* Frameworks */,
+				F44E65791DD060CC00379BE7 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -97,91 +93,58 @@
 			);
 			name = "LunarCore-Swift";
 			productName = "LunarCore-Swift";
-			productReference = F4652ACF1DCF3D700089258B /* LunarCore-Swift.app */;
-			productType = "com.apple.product-type.application";
+			productReference = F44E657B1DD060CC00379BE7 /* LunarCore-Swift */;
+			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		F4652AC71DCF3D700089258B /* Project object */ = {
+		F44E65731DD060CC00379BE7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = elors;
 				TargetAttributes = {
-					F4652ACE1DCF3D700089258B = {
+					F44E657A1DD060CC00379BE7 = {
 						CreatedOnToolsVersion = 8.1;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = F4652ACA1DCF3D700089258B /* Build configuration list for PBXProject "LunarCore-Swift" */;
+			buildConfigurationList = F44E65761DD060CC00379BE7 /* Build configuration list for PBXProject "LunarCore-Swift" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 			);
-			mainGroup = F4652AC61DCF3D700089258B;
-			productRefGroup = F4652AD01DCF3D700089258B /* Products */;
+			mainGroup = F44E65721DD060CC00379BE7;
+			productRefGroup = F44E657C1DD060CC00379BE7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F4652ACE1DCF3D700089258B /* LunarCore-Swift */,
+				F44E657A1DD060CC00379BE7 /* LunarCore-Swift */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		F4652ACD1DCF3D700089258B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F4652ADD1DCF3D700089258B /* LaunchScreen.storyboard in Resources */,
-				F4652ADA1DCF3D700089258B /* Assets.xcassets in Resources */,
-				F4652AD81DCF3D700089258B /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		F4652ACB1DCF3D700089258B /* Sources */ = {
+		F44E65771DD060CC00379BE7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4652AD31DCF3D700089258B /* AppDelegate.swift in Sources */,
-				F4652AE81DCF3EEF0089258B /* LunarCore.swift in Sources */,
+				F44E65871DD0615600379BE7 /* main.swift in Sources */,
+				F44E658B1DD061F200379BE7 /* Extension.swift in Sources */,
+				F44E65891DD0616000379BE7 /* LunarCore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		F4652AD61DCF3D700089258B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F4652AD71DCF3D700089258B /* Base */,
-			);
-			name = Main.storyboard;
-			path = "../../LunarCore-Swift";
-			sourceTree = "<group>";
-		};
-		F4652ADB1DCF3D700089258B /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F4652ADC1DCF3D700089258B /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			path = "../../LunarCore-Swift";
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
-		F4652ADF1DCF3D700089258B /* Debug */ = {
+		F44E65801DD060CC00379BE7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -202,7 +165,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -221,16 +184,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		F4652AE01DCF3D700089258B /* Release */ = {
+		F44E65811DD060CC00379BE7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -251,7 +213,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -264,33 +226,28 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				VALIDATE_PRODUCT = YES;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
-		F4652AE21DCF3D700089258B /* Debug */ = {
+		F44E65831DD060CC00379BE7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "LunarCore-Swift/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = sample.elors.lunarcore;
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
-		F4652AE31DCF3D700089258B /* Release */ = {
+		F44E65841DD060CC00379BE7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "LunarCore-Swift/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = sample.elors.lunarcore;
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -299,25 +256,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F4652ACA1DCF3D700089258B /* Build configuration list for PBXProject "LunarCore-Swift" */ = {
+		F44E65761DD060CC00379BE7 /* Build configuration list for PBXProject "LunarCore-Swift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F4652ADF1DCF3D700089258B /* Debug */,
-				F4652AE01DCF3D700089258B /* Release */,
+				F44E65801DD060CC00379BE7 /* Debug */,
+				F44E65811DD060CC00379BE7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F4652AE11DCF3D700089258B /* Build configuration list for PBXNativeTarget "LunarCore-Swift" */ = {
+		F44E65821DD060CC00379BE7 /* Build configuration list for PBXNativeTarget "LunarCore-Swift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F4652AE21DCF3D700089258B /* Debug */,
-				F4652AE31DCF3D700089258B /* Release */,
+				F44E65831DD060CC00379BE7 /* Debug */,
+				F44E65841DD060CC00379BE7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = F4652AC71DCF3D700089258B /* Project object */;
+	rootObject = F44E65731DD060CC00379BE7 /* Project object */;
 }
