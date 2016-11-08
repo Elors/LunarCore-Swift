@@ -309,7 +309,11 @@ class LunarCore {
         
         var k = start
         for _ in 0...len {
-            let dict = ["year": year, "month": month, "day": k]
+            let dict = [
+                "year": year,
+                "month": month,
+                "day": k
+            ]
             k += 1
             monthData.append(dict)
         }
@@ -655,7 +659,7 @@ class LunarCore {
      *
      *  @return 格式化后的日期
      */
-    private func formatDate(_ year: Int, _ month: Int, _ day: Int) -> [String: AnyObject?] {
+    private func formatDate(_ year: Int, _ month: Int, _ day: Int) -> [AnyHashable : Any] {
         let now = Date()
         var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
         gregorian.timeZone = timeZone
@@ -666,15 +670,15 @@ class LunarCore {
         
         if year < minYear || year > maxYear {
             return [
-                "error": 100 as AnyObject?,
-                "msg": errorCode[100] as AnyObject?
+                "error": 100 as Any,
+                "msg": errorCode[100] as Any
             ]
         }
         
         return [
-            "year": year as AnyObject?,
-            "month": month as AnyObject?,
-            "day": day as AnyObject?
+            "year": year as Any,
+            "month": month as Any,
+            "day": day as Any
         ]
     }
     
@@ -713,12 +717,14 @@ class LunarCore {
     func solarToLunar(_ year: Int, _ month: Int, _ day: Int) -> [AnyHashable: Any] {
         
         var inputDate = formatDate(year, month, day)
+        
         if (inputDate["error"] != nil) {
             return inputDate
         }
-        let year = inputDate["year"]! as! Int?
-        let month = inputDate["month"]! as! Int?
-        let day = inputDate["day"]! as! Int?
+        
+        let year = inputDate["year"]! as! Int
+        let month = inputDate["month"]! as! Int
+        let day = inputDate["day"]! as! Int
         memoryCache.current = year
         
         // 二十四节气
@@ -727,14 +733,14 @@ class LunarCore {
         if termListCache != nil {
             termList = termListCache as! [AnyHashable : Any]
         }else {
-            termList = getYearTerm(year!)
+            termList = getYearTerm(year)
             memoryCache.setKey("termList", Value: termList)
         }
         
         // 干支所在年份
-        let GanZhiYear = isNewLunarYear(year!, month!, day!) ? year! + 1 : year
+        let GanZhiYear = isNewLunarYear(year, month, day) ? year + 1 : year
         
-        let lunarDate = getLunarByBetween(year!, month!, day!)
+        let lunarDate = getLunarByBetween(year, month, day)
         let lunarDate0 = Int(lunarDate[0])
         let lunarDate1 = Int(lunarDate[1])
         let lunarDate2 = Int(lunarDate[2])
@@ -770,8 +776,8 @@ class LunarCore {
         }
         
         // 放假安排：0无特殊安排，1工作，2放假
-        let yearKey = String(format: "y%d", year!)
-        let dayKey = formatDay(month!, day!)
+        let yearKey = String(format: "y%d", year)
+        let dayKey = formatDay(month, day)
         var workTime = 0
         let hasData = worktime[yearKey]?[dayKey]
         if hasData != nil {
@@ -782,13 +788,13 @@ class LunarCore {
             "lunarDay": lunarDate[2],
             "lunarMonthName": lunarMonthName,
             "lunarDayName": lunarCalendarData["dateCn"]?[lunarDate2 - 1],
-            "solarFestival": i18n(solarFestival[formatDay(month!, day!)]!),
+            "solarFestival": i18n(solarFestival[formatDay(month, day)]!),
             "lunarFestival": i18n(lunarFtv!),
-            "weekFestival": getWeekFestival(year!, month! + 1, day!),
+            "weekFestival": getWeekFestival(year, month + 1, day),
             "worktime": workTime,
-            "GanZhiYear": getLunarYearName(GanZhiYear!, 0),
-            "zodiac": getYearZodiac(GanZhiYear!),
-            "term": termList[formatDay(month!, day!)]
+            "GanZhiYear": getLunarYearName(GanZhiYear, 0),
+            "zodiac": getYearZodiac(GanZhiYear),
+            "term": termList[formatDay(month, day)]
         ];
         return res
     }
@@ -809,18 +815,18 @@ class LunarCore {
             return inputDate
         }
         
-        let year = inputDate["year"]! as! Int?
-        let month = inputDate["month"]! as! Int?
+        let year = inputDate["year"]! as! Int
+        let month = inputDate["month"]! as! Int
         
-        let firstDate = date(year!, month!, 1)
+        let firstDate = date(year, month, 1)
         
         var res: [String: AnyObject] = [
             "firstDay": getDay(firstDate!) as AnyObject, // 该月1号星期几
-            "monthDays": getSolarMonthDays(year!, month!) as AnyObject, // 该月天数
+            "monthDays": getSolarMonthDays(year, month) as AnyObject, // 该月天数
             "monthData": [] as AnyObject
         ]
         
-        res["monthData"] = createMonthData(year!, month! + 1, 0, 1) as AnyObject?
+        res["monthData"] = createMonthData(year, month + 1, 0, 1) as AnyObject?
         
         var firstDay = res["firstDay"] as! Int
         
@@ -834,18 +840,18 @@ class LunarCore {
         let preFillDays = moveDays - weekStart
         
         // 前补齐
-        let preYear = (month! - 1 < 0) ? (year! - 1) : (year)
-        let preMonth = (month! - 1 < 0) ? (11) : (month! - 1)
-        let preMonthDays = getSolarMonthDays(preYear!, preMonth)
-        let preMonthData = createMonthData(preYear!, preMonth + 1, preFillDays, preMonthDays - preFillDays + 1)
+        let preYear = (month - 1 < 0) ? (year - 1) : (year)
+        let preMonth = (month - 1 < 0) ? (11) : (month - 1)
+        let preMonthDays = getSolarMonthDays(preYear, preMonth)
+        let preMonthData = createMonthData(preYear, preMonth + 1, preFillDays, preMonthDays - preFillDays + 1)
         var tempResMonthData: NSArray = res["monthData"] as! [Any] as NSArray
         res["monthData"] = (preMonthData as NSArray).addingObjects(from: tempResMonthData as! [Any]) as AnyObject?
         // 后补齐
         let length = (res["monthData"] as! [[String: Int]]).count
         let fillLen = 7 * 6 - length // [matrix 7 * 6]
         if fillLen != 0 {
-            let nextYear = (month! + 1 > 11) ? (year! + 1) : (year!)
-            let nextMonth = (month! + 1 > 11) ? (0) : (month! + 1)
+            let nextYear = (month + 1 > 11) ? (year + 1) : (year)
+            let nextMonth = (month + 1 > 11) ? (0) : (month + 1)
             let nextMonthData = createMonthData(nextYear, nextMonth + 1, fillLen, 1)
             tempResMonthData = (res["monthData"] as! [[String: Int]]) as NSArray
             res["monthData"] = tempResMonthData.addingObjects(from: nextMonthData) as AnyObject?
@@ -854,7 +860,7 @@ class LunarCore {
     }
     
     
-    func calendar(_ year: Int, _ month: Int) -> [AnyHashable: Any] {
+    func calendar(_ year: Int, _ month: Int) -> [AnyHashable : Any] {
         
         var inputDate = formatDate(year, month, -1)
         
@@ -862,10 +868,10 @@ class LunarCore {
             return inputDate
         }
         
-        let year = inputDate["year"]! as! Int?
-        let month = inputDate["month"]! as! Int?
+        let year = inputDate["year"]! as! Int
+        let month = inputDate["month"]! as! Int
         
-        var calendarData = solarCalendar(year!, month! + 1)
+        var calendarData = solarCalendar(year, month + 1)
         var monthData = calendarData["monthData"] as! [[String: Int]]
         
         for i in 0..<monthData.count {
@@ -876,7 +882,6 @@ class LunarCore {
                 array[i].updateValue(v as! Int, forKey: k as! String)
             }
         }
-        
         return calendarData
     }
     
