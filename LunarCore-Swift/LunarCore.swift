@@ -659,7 +659,7 @@ class LunarCore {
      *
      *  @return 格式化后的日期
      */
-    private func formatDate(_ year: Int, _ month: Int, _ day: Int) -> [AnyHashable : Any] {
+    private func formatDate(_ year: Int, _ month: Int, _ day: Int) -> [String : Any] {
         let now = Date()
         var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
         gregorian.timeZone = timeZone
@@ -807,7 +807,7 @@ class LunarCore {
      *
      *  @return 公历
      */
-    private func solarCalendar(_ year: Int, _ month: Int) -> [AnyHashable: Any] {
+    private func solarCalendar(_ year: Int, _ month: Int) -> [String: Any] {
         
         let inputDate = formatDate(year, month, -1)
         
@@ -860,7 +860,7 @@ class LunarCore {
     }
     
     
-    func calendar(_ year: Int, _ month: Int) -> [AnyHashable : Any] {
+    func calendar(_ year: Int, _ month: Int) -> [String: Any] {
         
         var inputDate = formatDate(year, month, -1)
         
@@ -877,10 +877,11 @@ class LunarCore {
         for i in 0..<monthData.count {
             var cData = monthData[i]
             let lunarData = solarToLunar(Int(cData["year"]!), Int(cData["month"]!), Int(cData["day"]!))
-            var array = calendarData["monthData"] as! [[String: Int]]
-            for (k, v) in lunarData {
-                array[i].updateValue(v as! Int, forKey: k as! String)
+            var array = calendarData["monthData"] as! [[String: Any!]]
+            for (key, value) in lunarData {
+                array[i][(key as! String)] = value
             }
+            calendarData["monthData"] = array
         }
         return calendarData
     }
