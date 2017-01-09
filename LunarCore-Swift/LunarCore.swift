@@ -19,8 +19,8 @@ private let weekStart   = 0        // 周首日（可改成 app 配置）
  *
  *  @return 本地化字符串
  */
-private func i18n(_ key: String) -> String {
-    return key
+private func i18n(_ key: String?) -> String {
+    return key ?? "nil"
 }
 
 /**
