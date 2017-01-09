@@ -401,7 +401,7 @@ class LunarCore {
     private func toString(_ num: Int?) -> [AnyObject?] {
         var arr = [AnyObject?]()
         var tempNum = num
-        while tempNum != nil {
+        while tempNum != 0 {
             arr.append(String(tempNum! & 1) as AnyObject?)
             tempNum = tempNum! >> 1
         }
