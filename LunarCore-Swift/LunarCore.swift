@@ -619,7 +619,7 @@ class LunarCore {
      */
     private func getLunarYearName(_ year: Int, _ offset: Int) -> String {
         // 1890年1月小寒（小寒一般是1月5或6日）以前为己丑年，在60进制中排25
-        let temp = year + offset - 1915/*1890 + 25*/
+        let temp = year + offset - 1865/* -1890+25 */
         return cyclical(Double(temp))
     }
     
