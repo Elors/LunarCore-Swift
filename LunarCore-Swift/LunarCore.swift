@@ -299,16 +299,17 @@ class LunarCore {
      *
      *  @return 整月日历
      */
-    private func createMonthData(_ year: Int, _ month: Int, _ len: Int, _ start: Int) -> [Dictionary<String, Int>] {
+    private func createMonthData(_ year: Int, _ month: Int, _ len: Int, _ start: Int) -> [Dictionary<String, Any>] {
         
-        var monthData: [Dictionary<String, Int>] = []
+        var monthData: [Dictionary<String, Any>] = []
         
         if len < 1 {
             return monthData
         }
         
         var k = start
-        for _ in 0...len {
+        
+        for _ in 0..<len {
             let dict = [
                 "year": year,
                 "month": month,
@@ -416,22 +417,23 @@ class LunarCore {
      *  @return 总天数
      */
     private func getLunarYearDays(_ year: Int) -> [String: AnyObject?] {
+        
         let yearData = lunarInfo[year - minYear]
         let leapMonth = yearData[safe: 0] // 闰月
         let monthData = yearData[safe: 3]
         var monthDataArr = toString(monthData)
         
         // 还原数据至16位,少于16位的在前面插入0（二进制存储时前面的0被忽略）
-        for _ in 0...(16-monthDataArr.count) {
+        for _ in 0..<(16-monthDataArr.count) {
              monthDataArr.insert(0 as AnyObject?, at: 0)
         }
         
-        let len = (leapMonth != nil) ? 13 : 12 // 该年有几个月
+        let len = (leapMonth != 0) ? 13 : 12 // 该年有几个月
         var yearDays = 0
         var monthDays: [Int] = []
         
-        for i in 0...len {
-            if let num = monthDataArr[safe: i], (num as? NSNumber)?.intValue == 0 {
+        for i in 0..<len {
+            if let num = (monthDataArr[safe: i] as? String), num == "0" {
                 yearDays += 29
                 monthDays.append(29)
             }else {
@@ -456,11 +458,11 @@ class LunarCore {
      */
     private func getLunarDateByBetween(_ year: Int, _ between: Int) -> [Int] {
         let lunarYearDays = getLunarYearDays(year)
-        let end = between > 0 ? between : ((lunarYearDays["yearDays"] as? NSNumber)?.intValue)! - abs(between)
+        let end = between > 0 ? between : (lunarYearDays["yearDays"] as! Int) - abs(between)
         let monthDays = lunarYearDays["monthDays"] as! [Int]
         var tempDays = 0
         var month = 0
-        for i in 0...monthDays.count {
+        for i in 0..<monthDays.count {
             let monthDaysI = monthDays[safe: i]
             tempDays += monthDaysI!
             if tempDays > end {
@@ -572,7 +574,7 @@ class LunarCore {
         var month = 0
         let solarTerm = lunarCalendarData["solarTerm"]
         
-        for i in 0...24 {
+        for i in 0..<24 {
             let day = getTerm(year, i)
             if (i & 1) == 00 {
                 month += 1
@@ -619,7 +621,7 @@ class LunarCore {
      */
     private func getLunarYearName(_ year: Int, _ offset: Int) -> String {
         // 1890年1月小寒（小寒一般是1月5或6日）以前为己丑年，在60进制中排25
-        let temp = year + offset - 1915/*1890 + 25*/
+        let temp = year + offset - 1865/* -1890+25 */
         return cyclical(Double(temp))
     }
     
@@ -664,21 +666,18 @@ class LunarCore {
         var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
         gregorian.timeZone = timeZone
         let components = gregorian.dateComponents([.year, .month, .day], from: now)
-        let year = year
-        let month = month - 1
-        let day = day > 0 ? day : components.day!
+        let _year = year
+        let _month = month - 1
+        let _day = day > 0 ? day : components.day!
         
-        if year < minYear || year > maxYear {
-            return [
-                "error": 100 as Any,
-                "msg": errorCode[100] as Any
-            ]
+        if (year < minYear) || (year > maxYear) {
+            return ["error": 100 as Any, "msg": errorCode[100] as Any]
         }
         
         return [
-            "year": year as Any,
-            "month": month as Any,
-            "day": day as Any
+            "year": _year as Any,
+            "month": _month as Any,
+            "day": _day as Any
         ]
     }
     
@@ -714,9 +713,9 @@ class LunarCore {
      *
      *  @return 农历年月日
      */
-    func solarToLunar(_ year: Int, _ month: Int, _ day: Int) -> [AnyHashable: Any] {
+    func solarToLunar(_ _year: Int, _ _month: Int, _ _day: Int) -> [AnyHashable: Any] {
         
-        var inputDate = formatDate(year, month, day)
+        var inputDate = formatDate(_year, _month, _day)
         
         if (inputDate["error"] != nil) {
             return inputDate
@@ -738,7 +737,7 @@ class LunarCore {
         }
         
         // 干支所在年份
-        let GanZhiYear = isNewLunarYear(year, month, day) ? year + 1 : year
+        let GanZhiYear = isNewLunarYear(_year, _month, _day) ? (year + 1) : (year)
         
         let lunarDate = getLunarByBetween(year, month, day)
         let lunarDate0 = Int(lunarDate[0])
@@ -807,9 +806,8 @@ class LunarCore {
      *
      *  @return 公历
      */
-    private func solarCalendar(_ year: Int, _ month: Int) -> [String: Any] {
-        
-        let inputDate = formatDate(year, month, -1)
+    private func solarCalendar(_ _year: Int, _ _month: Int) -> [String: Any] {
+        let inputDate = formatDate(_year, _month, -1)
         
         if inputDate["eror"] != nil {
             return inputDate
@@ -820,13 +818,13 @@ class LunarCore {
         
         let firstDate = date(year, month, 1)
         
-        var res: [String: AnyObject] = [
-            "firstDay": getDay(firstDate!) as AnyObject, // 该月1号星期几
-            "monthDays": getSolarMonthDays(year, month) as AnyObject, // 该月天数
-            "monthData": [] as AnyObject
+        var res: [String: Any] = [
+            "firstDay": getDay(firstDate!) as Any, // 该月1号星期几
+            "monthDays": getSolarMonthDays(year, month) as Any, // 该月天数
+            "monthData": [] as Any
         ]
         
-        res["monthData"] = createMonthData(year, month + 1, 0, 1) as AnyObject?
+        res["monthData"] = createMonthData(year, month + 1, (res["monthDays"] as! Int), 1) as Any?
         
         var firstDay = res["firstDay"] as! Int
         
@@ -844,10 +842,11 @@ class LunarCore {
         let preMonth = (month - 1 < 0) ? (11) : (month - 1)
         let preMonthDays = getSolarMonthDays(preYear, preMonth)
         let preMonthData = createMonthData(preYear, preMonth + 1, preFillDays, preMonthDays - preFillDays + 1)
+        
         var tempResMonthData: NSArray = res["monthData"] as! [Any] as NSArray
         res["monthData"] = (preMonthData as NSArray).addingObjects(from: tempResMonthData as! [Any]) as AnyObject?
         // 后补齐
-        let length = (res["monthData"] as! [[String: Int]]).count
+        let length = (res["monthData"] as! [Any]).count
         let fillLen = 7 * 6 - length // [matrix 7 * 6]
         if fillLen != 0 {
             let nextYear = (month + 1 > 11) ? (year + 1) : (year)
@@ -877,7 +876,7 @@ class LunarCore {
         for i in 0..<monthData.count {
             var cData = monthData[i]
             let lunarData = solarToLunar(Int(cData["year"]!), Int(cData["month"]!), Int(cData["day"]!))
-            var array = calendarData["monthData"] as! [[String: Any!]]
+            var array = calendarData["monthData"] as! [[String: Any]]
             for (key, value) in lunarData {
                 array[i][(key as! String)] = value
             }
