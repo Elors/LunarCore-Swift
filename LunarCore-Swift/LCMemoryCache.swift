@@ -18,20 +18,20 @@ public class LCMemoryCache: NSObject {
             clear()
         }
     }
-    var cache: [AnyHashable: Any?]
+    var cache: [String: Any?]
     
     
     override init() {
-        cache = [AnyHashable: Any?]()
+        cache = [String: Any?]()
         super.init()
     }
     
-    public func get(key: AnyHashable) -> Any? {
+    public func get(key: String) -> Any? {
         let a = cache[key] ?? nil
         return a
     }
     
-    public func setKey(_ key: AnyHashable, Value value: Any?) {
+    public func setKey(_ key: String, Value value: Any?) {
         cache[key] = value
     }
     

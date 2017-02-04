@@ -8,8 +8,6 @@
 
 import Foundation
 
-print("Hello, World!")
-
 let lunarCalendar = LunarCore().calendar(2017, 1)
 print("lunar - \(lunarCalendar)")
 

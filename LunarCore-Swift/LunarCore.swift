@@ -125,7 +125,7 @@ class LunarCore {
     }()
     // 中国节日放假安排，外部设置，0无特殊安排，1工作，2放假
     private lazy var worktime: [String: [String: Int]] = {
-        var dicts = [String: Dictionary<String, Int>]()
+        var dicts = [String: [String: Int]]()
         dicts["y2013"] = ["d0101":2,"d0102":2,"d0103":2,"d0105":1,"d0106":1,"d0209":2,"d0210":2,"d0211":2,"d0212":2,"d0213":2,"d0214":2,"d0215":2,"d0216":1,
                           "d0217":1,"d0404":2,"d0405":2,"d0406":2,"d0407":1,"d0427":1,"d0428":1,"d0429":2,"d0430":2,"d0501":2,"d0608":1,"d0609":1,"d0610":2,
                           "d0611":2,"d0612":2,"d0919":2,"d0920":2,"d0921":2,"d0922":1,"d0929":1,"d1001":2,"d1002":2,"d1003":2,"d1004":2,"d1005":2,"d1006":2,
@@ -317,12 +317,10 @@ class LunarCore {
      *
      *  @return 整月日历
      */
-    private func createMonthData(_ year: Int, _ month: Int, _ len: Int, _ start: Int) -> [Dictionary<String, Any>] {
-        var monthData: [Dictionary<String, Any>] = []
+    private func createMonthData(_ year: Int, _ month: Int, _ len: Int, _ start: Int) -> [[String: Int]] {
+        var monthData = [[String: Int]]()
         
-        if len < 1 {
-            return monthData
-        }
+        if len < 1 { return monthData }
         
         var k = start
         for _ in 0..<len {
@@ -579,8 +577,8 @@ class LunarCore {
      *
      *  @return 日期: 节气名
      */
-    private func getYearTerm(_ year: Int) -> [String: AnyObject?] {
-        var res = [String: AnyObject?]()
+    private func getYearTerm(_ year: Int) -> [String: String] {
+        var res = [String: String]()
         var month = 0
         let solarTerm = lunarCalendarData["solarTerm"]
         
@@ -591,7 +589,7 @@ class LunarCore {
             }
             let key = formatDay(month - 1, day)
             let value = i18n((solarTerm?[safe: i] ?? ""))
-            res[key] = value as AnyObject?
+            res[key] = value
         }
         return res
     }
@@ -671,7 +669,7 @@ class LunarCore {
      *
      *  @return 格式化后的日期
      */
-    private func formatDate(_ year: Int, _ month: Int, _ day: Int) -> [String : Any] {
+    private func formatDate(_ year: Int, _ month: Int, _ day: Int) -> [String: Any] {
         let now = Date()
         var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
         gregorian.timeZone = timeZone
@@ -681,13 +679,13 @@ class LunarCore {
         let _day = day > 0 ? day : components.day!
         
         if (year < minYear) || (year > maxYear) {
-            return ["error": 100 as Any, "msg": errorCode[100] as Any]
+            return ["error": 100, "msg": errorCode[100]!]
         }
         
         return [
-            "year": _year as Any,
-            "month": _month as Any,
-            "day": _day as Any
+            "year": _year,
+            "month": _month,
+            "day": _day
         ]
     }
     
@@ -723,7 +721,7 @@ class LunarCore {
      *
      *  @return 农历年月日
      */
-    func solarToLunar(_ _year: Int, _ _month: Int, _ _day: Int) -> [AnyHashable: Any] {
+    func solarToLunar(_ _year: Int, _ _month: Int, _ _day: Int) -> [String: Any?] {
         
         var inputDate = formatDate(_year, _month, _day)
         
@@ -737,10 +735,10 @@ class LunarCore {
         memoryCache.current = year
         
         // 二十四节气
-        var termList = [AnyHashable: Any]()
+        var termList = [String: Any]()
         let termListCache = memoryCache.get(key: "termList")
         if termListCache != nil {
-            termList = termListCache as! [AnyHashable : Any]
+            termList = termListCache as! [String : Any]
         }else {
             termList = getYearTerm(year)
             memoryCache.setKey("termList", Value: termList)
@@ -755,7 +753,7 @@ class LunarCore {
         let lunarDate2 = Int(lunarDate[2])
         
         let lunarLeapMonth = getLunarLeapYear(lunarDate0)
-        let lunarMonthName: String?
+        var lunarMonthName = String()
         
         if lunarLeapMonth > 0 && lunarLeapMonth == lunarDate1 {
             let mStr = i18n((lunarCalendarData["monthCn"]?[lunarDate1 - 1]));
@@ -788,15 +786,14 @@ class LunarCore {
         let yearKey = String(format: "y%d", year)
         let dayKey = formatDay(month, day)
         var workTime = 0
-        let hasData = worktime[yearKey]?[dayKey]
-        if hasData != nil {
-            workTime = hasData!
+        if let hasData = worktime[yearKey]?[dayKey] {
+            workTime = hasData
         }
         
-        let res = [
+        return [
             "lunarDay": lunarDate[2],
             "lunarMonthName": lunarMonthName,
-            "lunarDayName": lunarCalendarData["dateCn"]?[lunarDate2 - 1],
+            "lunarDayName": lunarCalendarData["dateCn"]![lunarDate2 - 1],
             "solarFestival": i18n(solarFestival[formatDay(month, day)]),
             "lunarFestival": i18n(lunarFtv),
             "weekFestival": getWeekFestival(year, month + 1, day),
@@ -804,8 +801,7 @@ class LunarCore {
             "GanZhiYear": getLunarYearName(GanZhiYear, 0),
             "zodiac": getYearZodiac(GanZhiYear),
             "term": termList[formatDay(month, day)]
-        ];
-        return res
+        ]
     }
     
     /**
@@ -870,7 +866,6 @@ class LunarCore {
     
     
     func calendar(_ year: Int, _ month: Int) -> [String: Any] {
-        
         var inputDate = formatDate(year, month, -1)
         
         if (inputDate["error"] != nil) {
@@ -888,7 +883,7 @@ class LunarCore {
             let lunarData = solarToLunar(Int(cData["year"]!), Int(cData["month"]!), Int(cData["day"]!))
             var array = calendarData["monthData"] as! [[String: Any]]
             for (key, value) in lunarData {
-                array[i][(key as! String)] = value
+                array[i][key] = value
             }
             calendarData["monthData"] = array
         }
