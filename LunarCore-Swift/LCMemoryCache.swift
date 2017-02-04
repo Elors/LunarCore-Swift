@@ -11,7 +11,7 @@ import Cocoa
 /**
  *  缓存 主要是缓存节气信息
  */
-public class LCMemoryCache: NSObject {
+public struct LCMemoryCache {
     
     var current: Int? {
         didSet {
@@ -21,9 +21,8 @@ public class LCMemoryCache: NSObject {
     var cache: [String: Any?]
     
     
-    override init() {
+    init() {
         cache = [String: Any?]()
-        super.init()
     }
     
     public func get(key: String) -> Any? {
@@ -31,11 +30,11 @@ public class LCMemoryCache: NSObject {
         return a
     }
     
-    public func setKey(_ key: String, Value value: Any?) {
+    public mutating func setKey(_ key: String, Value value: Any?) {
         cache[key] = value
     }
     
-    private func clear() {
+    private mutating func clear() {
         cache.removeAll()
     }
 }

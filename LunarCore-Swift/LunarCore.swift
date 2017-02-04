@@ -20,7 +20,7 @@ private let weekStart   = 0        // 周首日（可改成 app 配置）
  *  @return 本地化字符串
  */
 private func i18n(_ key: String?) -> String {
-    return key ?? "nil"
+    return key ?? ""
 }
 
 /**
@@ -408,11 +408,11 @@ class LunarCore {
         return yearData[0]
     }
     
-    private func toString(_ num: Int?) -> [AnyObject?] {
-        var arr = [AnyObject?]()
+    private func toString(_ num: Int?) -> [Any?] {
+        var arr = [Any?]()
         var tempNum = num
         while tempNum != 0 {
-            arr.append(String(tempNum! & 1) as AnyObject?)
+            arr.append(String(tempNum! & 1))
             tempNum = tempNum! >> 1
         }
         return arr.reversed()
@@ -425,7 +425,7 @@ class LunarCore {
      *
      *  @return 总天数
      */
-    private func getLunarYearDays(_ year: Int) -> [String: AnyObject?] {
+    private func getLunarYearDays(_ year: Int) -> [String: Any?] {
         let yearData = lunarInfo[year - minYear]
         let leapMonth = yearData[safe: 0] // 闰月
         let monthData = yearData[safe: 3]
@@ -433,7 +433,7 @@ class LunarCore {
         
         // 还原数据至16位,少于16位的在前面插入0（二进制存储时前面的0被忽略）
         for _ in 0..<(16-monthDataArr.count) {
-             monthDataArr.insert(0 as AnyObject?, at: 0)
+             monthDataArr.insert(0, at: 0)
         }
         
         let len = (leapMonth != 0) ? 13 : 12 // 该年有几个月
@@ -451,8 +451,8 @@ class LunarCore {
         }
         
         return [
-            "yearDays": yearDays as AnyObject?,
-            "monthDays": monthDays as AnyObject?
+            "yearDays": yearDays,
+            "monthDays": monthDays
         ]
     }
     
@@ -528,15 +528,6 @@ class LunarCore {
         }
     }
     
-    /**
-     *  某年的第n个节气为几日
-     *  由于农历24节气交节时刻采用近似算法，可能存在少量误差(30分钟内)
-     *  31556925974.7为地球公转周期，是毫秒
-     *  1890年的正小寒点：01-05 16:02:31，1890年为基准点
-     *
-     *  @param y    公历年
-     *  @param n    第几个节气，从0小寒起算
-     */
     private func UTC(_ year: Int, _ month: Int, _ day: Int, _ hour: Int, _ min: Int, _ sec: Int) -> TimeInterval {
         var calendar = Calendar.current
         var comp = DateComponents()
@@ -560,6 +551,15 @@ class LunarCore {
         return (components.weekday! - 1)
     }
     
+    /**
+     *  某年的第n个节气为几日
+     *  由于农历24节气交节时刻采用近似算法，可能存在少量误差(30分钟内)
+     *  31556925974.7为地球公转周期，是毫秒
+     *  1890年的正小寒点：01-05 16:02:31，1890年为基准点
+     *
+     *  @param y    公历年
+     *  @param n    第几个节气，从0小寒起算
+     */
     private func getTerm(_ y: Int, _ n: Int) -> Int {
         var sec = UTC(1890, 0, 5, 16, 2, 31)
         sec += (31556925974.7 * Double(y - 1890)) + (Double(termInfo[safe: n] ?? 0) * 60000.0)
@@ -692,9 +692,9 @@ class LunarCore {
     /**
      *  判断是否处于农历新年
      *
-     *  @param _year  阳历年
-     *  @param _month 阳历月
-     *  @param _day   阳历日
+     *  @param year  阳历年
+     *  @param month 阳历月
+     *  @param day   阳历日
      *
      *  @return YES 表示处于农历新年
      */
@@ -825,12 +825,12 @@ class LunarCore {
         let firstDate = date(year, month, 1)
         
         var res: [String: Any] = [
-            "firstDay": getDay(firstDate!) as Any, // 该月1号星期几
-            "monthDays": getSolarMonthDays(year, month) as Any, // 该月天数
-            "monthData": [] as Any
+            "firstDay": getDay(firstDate!), // 该月1号星期几
+            "monthDays": getSolarMonthDays(year, month), // 该月天数
+            "monthData": []
         ]
         
-        res["monthData"] = createMonthData(year, month + 1, (res["monthDays"] as! Int), 1) as Any?
+        res["monthData"] = createMonthData(year, month + 1, (res["monthDays"] as! Int), 1)
         
         var firstDay = res["firstDay"] as! Int
         
@@ -850,7 +850,7 @@ class LunarCore {
         let preMonthData = createMonthData(preYear, preMonth + 1, preFillDays, preMonthDays - preFillDays + 1)
         
         var tempResMonthData: NSArray = res["monthData"] as! [Any] as NSArray
-        res["monthData"] = (preMonthData as NSArray).addingObjects(from: tempResMonthData as! [Any]) as AnyObject?
+        res["monthData"] = (preMonthData as NSArray).addingObjects(from: tempResMonthData as! [Any])
         // 后补齐
         let length = (res["monthData"] as! [Any]).count
         let fillLen = 7 * 6 - length // [matrix 7 * 6]
@@ -859,7 +859,7 @@ class LunarCore {
             let nextMonth = (month + 1 > 11) ? (0) : (month + 1)
             let nextMonthData = createMonthData(nextYear, nextMonth + 1, fillLen, 1)
             tempResMonthData = (res["monthData"] as! [[String: Int]]) as NSArray
-            res["monthData"] = tempResMonthData.addingObjects(from: nextMonthData) as AnyObject?
+            res["monthData"] = tempResMonthData.addingObjects(from: nextMonthData)
         }
         return res
     }
